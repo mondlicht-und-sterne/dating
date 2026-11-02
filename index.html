@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dating-Phänomene | Black Lila Edition</title>
+<style>
+:root{
+  --bg: #05050a;
+  --card: #111119;
+  --text: #f5f5ff;
+  --muted: #a78bfa;
+  --accent: #8b5cf6;
+  --accent-2: #c084fc;
+  --glow: rgba(139, 92, 246, 0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(800px 600px at 20% 0%, rgba(139,92,246,.12), transparent 50%),
+              radial-gradient(600px 400px at 80% 100%, rgba(192,132,252,.10), transparent 50%),
+              var(--bg);
+  color: var(--text);
+  padding: 40px 20px;
+  line-height: 1.6;
+}
+.wrap{max-width: 900px;margin: 0 auto;}
+header{text-align: center;margin-bottom: 32px;}
+h1{
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #fff 0%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.subtitle{color: var(--muted);font-size: 18px;margin-bottom: 24px;}
+
+.controls{
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.search{width: 100%;max-width: 400px;}
+.search input{
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(17,17,25,.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139,92,246,.2);
+  border-radius: 14px;
+  color: var(--text);
+  font-size: 16px;
+  outline: none;
+  transition: all.2s;
+}
+.search input:focus{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--glow);
+}
+.btn{
+  padding: 16px 24px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all.2s;
+}
+.btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--glow);
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.card{
+  background: rgba(17,17,25,.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(139,92,246,.15);
+  border-radius: 18px;
+  padding: 24px;
+  transition: all.25s;
+}
+.card:hover{
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 40px var(--glow);
+}
+.card.hidden{display: none;}
+.card.highlight{
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 3px var(--glow), 0 20px 60px rgba(192,132,252,.4);
+  transform: scale(1.03);
+}
+.card h3{font-size: 20px;margin-bottom: 8px;color: var(--accent-2);}
+.card p{color: var(--muted);font-size: 15px;}
+.no-results{text-align: center;color: var(--muted);padding: 40px;display: none;}
+footer{text-align: center;margin-top: 60px;color: var(--muted);font-size: 13px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Dating-Phänomene</h1>
+    <p class="subtitle">Die dunkle Seite des Datens</p>
+  </header>
+
+  <div class="grid" id="grid">
+    <div class="card" data-name="advodating aktivismus politik klimastreik">
+      <h3>Advodating</h3>
+      <p>Der Klimastreik als Dating-Faktor: Wie aktivistisch ist man, Distanz ist kein Problem, 
+Politische Gesinnung zählt, Selfies für einen guten ersten Eindruck, Schnell 
+Zusammenziehen und Tiefgehende Gespräche statt Small Talk</p>
+    </div>
+    <div class="card" >
+      <h3>Bashing</h3>
+      <p>Öffentliche Beschimpfung</p>
+    </div>
+    <div class="card" >
+      <h3>Baywatching</h3>
+      <p>Singles schützen ihre persönlichen Bedürfnisse und Grenzen</p>
+    </div>
+    <div class="card" >
+      <h3>Benching</h3>
+      <p>Auf die lange Bank schieben. Nun hat jeder sein eigenes Kennenlern-Tempo und es wird immer Paare geben, bei denen es einem Partner zu langsam oder zu schnell geht. Doch Benching geschieht meist, weil man sich in der Fülle vermeintlicher potentieller Kandidaten nicht für einen entscheiden mag und ihn deshalb hinhält.</p>
+    </div>
+    <div class="card" >
+      <h3>Binge Dating</h3>
+      <p>5 Dates in einer Woche mit 5 verschiedenen Menschen</p>
+    </div>
+    <div class="card" >
+      <h3>Bird Boxing</h3>
+      <p>vor lauter Verknalltheit nicht mehr mitbekommen, das das Date ein Vollidiot ist</p>
+    </div>
+    <div class="card" >
+      <h3>Blue-stalling</h3>
+      <p>wenn sich jemand verhält wie in einer Beziehung, aber sobald es so aussieht, macht die Person einen Rückzieher.</p>
+    </div>
+    <div class="card" >
+      <h3>Body Shaming</h3>
+      <p>Wenn dir jemand sagt und/oder schreibt "Du bist hässlich, dick, deine Beine sind nicht schön.</p>
+    </div>
+    <div class="card" >
+      <h3>Bravehearting</h3>
+      <p>Wer das Negative beiseitelässt, sieht Möglichkeiten und Erfolge.</p>
+    </div>
+    <div class="card" >
+      <h3>Breadcrumbing</h3>
+      <p>Jemanden mit kleinen Stücken Brot immer wieder zu füttern. Eine Methode, einem Kontakt dauerhaft falsche Hoffnungen zu machen. Aber ohne dabei angreifbar zu sein. Typische Brotkrümel sind kurze Kommentare unter Fotos, spontane Textnachrichten oder das Hinterlassen von Likes und Emoijs, um sich in Erinnerung zu bringen. Er meldet sich nur, wenn er kurz Aufmerksamkeit braucht.</p>
+    </div>
+    <div class="card" >
+      <h3>Caspering</h3>
+      <p>Korb geben mit Begründung. Beispiel: Es war toll, dich kennenzulernen, du bist ein spannender Mensch, doch es hat bei mir nicht gefunkt.</p>
+    </div>  
+    <div class="card" >
+      <h3>Casual Dating</h3>
+      <p>Beziehung ohne Verpflichtungen</p>
+    </div>  
+    <div class="card" >
+      <h3>Catfishing</h3>
+      <p>Die ausgewachsene Form von Kittenfishing. Ein Catfish gibt sich als jemand anderes aus. Entweder als eine Person oder als frei erfundener Mensch. Dazu nutzt er Fake-Accounts, deren Namen, Profilbilder, Kontakte, usw. keinen Aufschluss auf die eigene Person zulassen. Die Methode des Catfishing ist es, in sozialen Netzwerken eine romantische Onlinebeziehung zu jemandem herzustellen. Wenn jemand in der Welt zu scheu oder bereits vergeben ist, kann die falsche Identität vor Konsequenzen schützen. Oder die Beziehung dient dazu, eine bestimmte Person zu mobben, mit dem Ziel, dass das Opfer dem Catfish intime Geheimnisse anvertraut. Die können dann gegen sie verwendet werden oder der Catfish macht sich einfach über die Gedanken und Gefühle seines Opfers lustig.</p>
+    </div>  
+    <div class="card" >
+      <h3>Cause Playing</h3>
+      <p>Sie haben sich vor Monaten getrennt und auf einmal nimmt er Kontakt auf, weil er will, dass Sie für ihn zum Beispiel in einer Abstimmung voten, für seinen Geburtstag auf Facebook spenden oder ähnliches Unpersönliches tun. </p>
+    </div>  
+    <div class="card" >
+      <h3>Clearing</h3>
+      <p>Ausmisten zu Jahresbeginn. Viele Leute greifen jetzt zum Handy und löschen alte Chats und Telefonnummern von Ex-Dates, Verflossenen, Affären.</p>
+    </div>  
+    <div class="card" >
+      <h3>Cloaking</h3>
+      <p>Partner verschwindet nicht nur ohne ein Lebenszeichen von sich zu geben, sondern sperrt den anderen dazu noch im ganzen Social Media. Die Person ist einfach nicht mehr erreichbar.</p>
+    </div>  
+    <div class="card" >
+      <h3>Consciously Single</h3>
+      <p>Einen besonderen Menschen zu finden, nicht einen beliebigen. Es ist vollkommen in Ordnung, eine Zeit lang Single zu sein. Man entscheidet sich bewusst für das Single-Dasein und geht achtsamer und bewusster damit um, wie, wann und wen man datet.</p>
+    </div>  
+    <div class="card" >
+      <h3>Cuffing</h3>
+      <p>Die Zeit zwischen Herbst und Frühjahr. Wenn die Tage kürzer werden und es abkühlt, sehnen wir uns weniger nach Action als nach kuscheligen Abenden auf dem Sofa. Lernt man in dieser Zeit jemanden kennen, kann es schnell passieren, dass sich die frisch verliebten Paare aneinander ketten (Cuff = Handschelle), um die dunkle Winterzeit nicht allein verbringen zu müssen. Man entwickelt schnell Gefühle, gemeinsame Rituale und verbringt den Grossteil der Zeit zu Hause oder beim Partner. Die gemütlichen Herbstabende werden durchgeplant, an gemeinsame Aktivitäten im Sommer denkt ihr trotz aller Zukunftsplanung allerdings nicht. Sobald die Sonne wieder hinter den Wolken hervorgekrochen kommt, verschwinden auch die Gefühle so schnell, wie sie gekommen sind. Die meisten der Cuffing-Beziehungen werden dann einvernehmlich beendet. Psychologen bestätigen übrigens, dass dieses Phänomen bedingt ist. Der Mensch will nicht allein überwintern und sehnt sich bei kalten Temperaturen nach einem Partner an seiner Seite.</p>
+    </div>  
+    <div class="card" >
+      <h3>Cushioning</h3>
+      <p>sich niemals ganz auf eine Person einzulassen. Also für den Fall eines Liebesaus noch als Polster Kontakt zu zwei oder drei weiteren Personen zu halten. Nahtlos von einer Partnerschaft in die nächste. </p>
+    </div>  
+    <div class="card" >
+      <h3>Curving</h3>
+      <p>Man steht schon lange im Kontakt, doch wenn der Wunsch nach einem Date zur Sprache kommt, wird abrupt das Thema gewechselt. Vielleicht datet man schon seit einer Weile, doch die Frage nach dem Beziehungstatus wird immer elegant umschifft. Wer sich alle Optionen offen hält und sich parallel mehrere Personen warmhält, der fährt grosse Kurven um die Frage: Was ist das jetzt zwischen uns. Manchmal hat Curving aber auch andere Beweggründe: Auch, wer in einer festen Beziehung steckt, aber gerne fremdflirtet, neigt zum Curving. Tacheles reden?! Nein. Auf das Curving angesprochen reagieren die meisten gleich: Sie antworten einfach nicht und reagieren auch auf keine weiteren Nachrichten oder Anrufe mehr.</p>
+    </div>  
+    <div class="card" >
+      <h3>Dating-Fatigue</h3>
+      <p>Erschöpfung und Frustration, das durch die Suche nach einer passenden Partnerin oder einem passenden Partner entsteht</p>
+    </div>  
+    <div class="card" >
+      <h3>Dating Burnout</h3>
+      <p>Viele erfolglose Dates können dazu führen, das sich Singles, wie bei einem klassischen Burnout, ausgelaugt und leer fühlen. Im besten Fall lassen sie sich krankschreiben. Du brauchst Hilfe. Rede mit jemandem, nicht das du einem schlimmen Schritt machst. </p>
+    </div>  
+    <div class="card" >
+      <h3>Dating Down</h3>
+      <p>Starke Frauen flirten mit schwachen Männern. Beispiel: Eine Körbengrösse zu wenig und mindestens 15 IQ Punkte zu viel. </p>
+    </div>  
+    <div class="card" >
+      <h3>Dating Sunday</h3>
+      <p>Der erste Sonntag im Jahr für Singles</p>
+    </div>  
+    <div class="card" >
+      <h3>Dauersingle</h3>
+      <p>wenn eine Person 10 oder mehr Jahre lang keine feste Beziehung hatte</p>
+    </div>  
+    <div class="card" >
+      <h3>Deja Eww</h3>
+      <p>Wenn man jemand bekanntes, nicht ganz so beliebtes Gesicht sieht, das man längst vergessen hatte</p>
+    </div>  
+    <div class="card" >
+      <h3>Dial-toning</h3>
+      <p>Nachdem Nummern ausgetauscht werden, ist Funkstille. Ihr potenzielles Date ignoriert Ihren Annäherungsversuch einfach und dass, obwohl es selbst nach Ihrer Nummer gefragt hat.</p>
+    </div>  
+    <div class="card" >
+      <h3>Dkaking</h3>
+      <p>schnulzige Lebenszeichen von sich verbreiten</p>
+    </div>  
+    <div class="card" >
+      <h3>Dogfishing</h3>
+      <p>Mann lässt sich mit Hunden ablichten, damit eine potentielle Frau denkt, er hätte einen Hund und eher ja zu einem Date sagt. Und dann wars nur der Hund des Freundes, des Bruders, ein gestelltes Bild. Kein guter Anfang. </p>
+    </div>  
+    <div class="card" >
+      <h3>Doxing</h3>
+      <p>veröffentlichen personenbezogener Daten, mit bösartigen Absichten gegenüber den Betroffenen, die öffentlich blossgestellt und belästigt werden sollen </p>
+    </div>  
+    <div class="card" data-name="ghosting">
+      <h3>Drafting</h3>
+      <p>viele Menschen daten </p>
+    </div>    
+    <div class="card" data-name="ghosting">
+      <h3>Dry Dating</h3>
+      <p>Das Treffen mit jemandem, ohne Alkohol oder andere Substanzen zu konsumieren, um eine authentischere Verbindung aufzubauen. </p>
+    </div>  
+    <div class="card" data-name="ghosting">
+      <h3>Eclipsing</h3>
+      <p>Jemand, den Sie gerade treffen, teilt dir mit, er hat die gleichen Hobbies wie Du. Du gehst gerne wandern? Er auch. Du gehst gern ins Museum? Er auch. Du machst gern Bilder? Er auch. Warum er alles vorgibt? Einzig und alleine, um Ihnen zu gefallen. Es zeigt jedoch nicht, wer er wirklich ist. </p>
+    </div>  
+        <div class="card" data-name="ghosting">
+      <h3>Elsa</h3>
+      <p>Wenn jemand den Kontakt von jetzt auf gleich einfriert, ohne Erklärung und Hinweis auf einen Grund</p>
+    </div>  
+        <div class="card" data-name="ghosting">
+      <h3>Ethical Sex-ploration</h3>
+      <p>Wünsche und Bedürfnisse frühzeitig beim Dating besprechen </p>
+    </div>  
+        <div class="card" data-name="ghosting">
+      <h3>Exklusive Dating</h3>
+      <p>Zwei Menschen daten lose, sind aber offen, jemanden anderen zu daten. Sollte sich die Beziehung dann vertiefen, entscheiden sich die Parteien dafür, nun exklusiv zu werden. Aber dies ist keinesfalls der Beginn einer festen Beziehung. Diese exklusive Phase des Dating bedeutet zwar, dass man sich ab sofort nurmehr auf eine Person fokussiert, aber, man ist noch meilenweit von einer endgültigen Bindung entfernt. Exklusive Dating ist eine dazwischengeschobene Phase, in der man sich erst festlegt, aber noch nicht die Verantwortung einer echten festen Beziehung tragen muss</p>
+    </div>  
+        <div class="card" data-name="ghosting">
+      <h3>Explori-Dating</h3>
+      <p>Auch wenn Menschen jetzt nach etwas Neuem suchen, bedeutet das nicht unbedingt, dass sie mit festgelegten Erwartungen ans Dating herangehen. Ab jetzt was Neues ausprobieren</p>
+    </div>  
+        <div class="card" data-name="ghosting">
+      <h3>Exting</h3>
+      <p>seinem Ex im angetrunkenen Zustand weiterhin Textnachrichten schreiben. Und der Tag danach wenn man langsam wieder ausnüchtert und liesst, was man geschrieben hat</p>
+    </div>    
+
+    <div class="card" data-name="ghosting">
+      <h3>Frage und Antwort</h3>
+      <p>Wenn bei einem Date nur Standardfragen kommen wie Arbeit, Schule und Familie</p>
+    </div>    
+        <div class="card" data-name="ghosting">
+      <h3>Fast Forwarding</h3>
+      <p>Wenn Paare nach wenigen Wochen schon zusammenziehen, um die Verlustangst auszugleichen</p>
+    </div>    
+        <div class="card" data-name="ghosting">
+      <h3>Faux baeing</h3>
+      <p>der bzw die EX soll durch Bilder denken, man wäre wieder vergeben oder um den Flirt loszuwerden</p>
+    </div>    
+        <div class="card" data-name="ghosting">
+      <h3>Faux-nogomie</h3>
+      <p>Menschen, die betonen, dass sie etwas Festes, Exklusives suchen, kurz darauf aber fremdgehen und mehrgleisig fahren</p>
+    </div>    
+        <div class="card" data-name="ghosting">
+      <h3>Firedooring</h3>
+      <p>gefährdet nicht nur Liebesbeziehungen, sondern auch Freundschaften. Hattest du schon mal eine Beziehung, bei der du das Gefühl hattest, alle Bemühungen, die nötig sind, um sie am Leben zu erhalten, fallen zu deinen Lasten? Tage- oder wochenlang hörst du nichts von ihm, es sei denn, du meldest dich zuerst. Und wenn er sich dann meldet, lässt du sofort alles stehen und liegen, um an seine Seite zu eilen? Weil du genau weisst: Wenn du die wenigen Momente, die er dir bietet, nicht ausnutzt, dann habt ihr bald gar keine Beziehung mehr. Diese einseitige und verletzende Beziehungsmasche leitet ihren Namen vom Mechanismus von Brandschutztüren ab: Sie gehen nur von einer Seite auf und sind nur dafür gedacht, Dinge reinzulassen, aber nicht raus. Alles, was durch diese Tür geschickt wird, kommt nicht zurück. Auf eure Beziehung angewandt bedeutet das: Wenn er dir nicht die Tür aufmacht, dann musst du davor stehenbleiben. Und auch wenn du viel in die Beziehung hineinsteckst, es kommt niemals etwas von ihm zurück. Warum das Dating-Phänomen auch Freundschaften zerstört: Die Besonderheit bei Firedooring ist, dass es in Freundschaften genauso häufig auftritt wie in Liebesbeziehungen. Wenn deine Freundin nur noch nimmt (deine Aufmerksamkeit, deine Zeit, deine Ratschläge, deine Schulter zum Ausheulen). Wenn du eben diese Dinge nicht von ihr zurückbekommst. Wenn du nicht auf sie zählen kannst. Wenn du sie brauchst. Wenn sie den Kontakt nur zulässt. Wenn sie gerade etwas von dir will - dann findet auch hier Firedooring statt</p>
+    </div>    
+        <div class="card" >
+      <h3>Fishing</h3>
+      <p>an viele Kontakte Fragen stellen z.b. Was machst du gerade? oder: Noch wach?. Reagiert jemand auf die Kontaktaufnahme, geht er gewissermassen ins Netz, woraufhin die Konversation fortgesetzt werden kann. Was nicht gemeint ist: So vielen Leuten wie möglich beim Online-Dating Nachrichten schreiben, schauen wer anbeißt und sich davon die attraktivste Person raussuchen. Zu allen anderen den Kontakt kommentarlos abbrechen</p>
+    </div>    
+        <div class="card" >
+      <h3>Fizzing</h3>
+      <p>Stellt euch vor, ihr datet jemanden und alles läuft bestens. Die Treffen werden zuerst immer intensiver und es bahnt sich schon eine richtige Beziehung an. Doch irgendwie trauen sich beide Partner nicht so wirklich, endlich den nächsten Schritt zu wagen und über den Beziehungsstatus zu sprechen. Sie treffen sich also weiterhin, aber irgendwann bricht der Kontakt ganz ab - ohne Vorwarnung, ohne richtige Trennung. Von beiden Seiten besteht zwar noch Interesse, aber man ist zu stolz, sich bei seinem Gegenüber zu melden. Plötzlich schreibt man sich nicht mehr, geschweige denn trifft sich. Ein offizielles Schlussmachen gibt es nicht. Beide warten ab, bis sich die andere Person wieder meldet. Keiner möchte allerdings selbst der Erste sein. Die Zeit vergeht und irgendwann ist die Lovestory beendet. Schweigen statt Trennung. Statt einem richtigen Schlussstrich, nach dem man endlich anfangen kann, über die Beziehung hinwegzukommen, gibt es Ungewissheit. Im Unterschied zu Ghosting gab es zuvor aber schon intensiven Kontakt. Trotzdem wusste keiner der Beteiligten so richtig, wie man die Beziehung definieren solle. Irgendwann ist die Luft dann draußen. Weil man aber nie über die Beziehung gesprochen hat, traut sich auch keiner der beiden die Trennung offiziell zu verkünden</p>
+    </div>    
+        <div class="card" >
+      <h3>Flatlining</h3>
+      <p>Wenn es zu schwierig ist, ein Gespräch am Laufen zu halten, also wenn ein Gespräch im Sande verläuft</p>
+    </div>    
+        <div class="card" >
+      <h3>Fleabagging</h3>
+      <p>Single-Frauen geraten an die falschen Männer. Sie sind beziehungsunfähig, Trotzdem fühlen sich Frauen immer wieder zu ihnen hingezogen</p>
+    </div>    
+        <div class="card" >
+      <h3>Flying Monkeys</h3>
+      <p>Betroffene können ohne traumatherapeutische Behandlung (Rache und Vergeltung, um Üble Nachrede bei Freunden und Familienmitgliedern, um Sachbeschädigung, um Telefonterror, gehackte E-Mail-Accounts, Identitäts-Diebstahl und Stalking bis hin zu körperlicher Gewalt) kein Vertrauen und keine Nähe mehr zulassen. Sie werden über gemeinsame Freunde verfolgt</p>
+    </div>    
+        <div class="card" >
+      <h3>Freckling</h3>
+      <p>Sommerromanzen die nach wenigen Monaten wieder vorbei sind</p>
+    </div>    
+        <div class="card" >
+      <h3>Freundschaft Plus</h3>
+      <p>wenn man nur freundschftlich gut fürs Bett ist </p>
+    </div>    
+        <div class="card" >
+      <h3>Friendzone</h3>
+      <p>unglücklich verliebt und es wird nur Freundschaft bzw es bleibt dabei</p>
+    </div>    
+        <div class="card" >
+      <h3>Future Faking</h3>
+      <p>sich über die Zukunft Gedanken machen, vom Heiraten, zusammenziehen reden. Und wenn der andere es angenommen hat schon längst wieder weg sein</p>
+    </div>    
+    <div class="card" >
+      <h3>Gaslighting</h3>
+      <p>bestimmte Fotos hochladen, die der andere einfach liken soll</p>
+    </div>
+    <div class="card" >
+      <h3>Ghosting</h3>
+      <p>vollständiger Kontakt- und Kommunikationsabbruch ohne Ankündigung</p>
+    </div>
+    <div class="card" >
+      <h3>Groundhogging</h3>
+      <p>Das Dating-Muster wird immer wiederholt</p>
+    </div>
+    <div class="card" >
+      <h3>Guardrailing</h3>
+      <p>Singles setzen Grenzen</p>
+    </div>    
+    <div class="card" >
+      <h3>Hardballing</h3>
+      <p>Es werden keine Spielchen mehr gespielt, sondern die "Bälle" gezielt und überzeugt zugespielt</p>
+    </div>    
+    <div class="card" >
+      <h3>Hatfishing</h3>
+      <p>Da beim Online-Dating die Profilfotos von besonders großer Bedeutung sind, neigen viele Menschen dazu, sich auf diesen möglichst vorteilhaft zu präsentieren. Dazu gehört, dass schütteres Haar, zurückgehende Haaransätze oder gar kahle Stellen durch Kopfbedeckungen kaschiert werden. Wird dies mit Absicht dauerhaft praktiziert, wird so dem Gegenüber ein falsches Bild des eigenen Äußeren vermittelt. Das Ziel dabei ist, so mehr Treffer in den Dating-Apps zu erzielen. Häufig wird Hatfishing aus Angst abgewiesen zu werden auch noch bei den ersten realen Treffen durchgeführt. Es versteht sich allerdings von selbst, dass die Vorspiegelung falscher Tatsachen niemals eine gute Idee ist, eine mögliche Beziehung zu beginnen</p>
+    </div>    
+    <div class="card" >
+      <h3>Haunting</h3>
+      <p>Dein Ex reagiert auf keinen deiner Anrufe oder Nachrichten, stalkt dich aber überall </p>
+    </div>    
+    <div class="card" >
+      <h3>Hobby Dates</h3>
+      <p>Sei es backen, wandern oder ein Unternehmen gründen. Neue Hobbies entdecken. Über gemeinsame Interessen eine Verbindung aufbauen</p>
+    </div>    
+    <div class="card" >
+      <h3>Honesty Bombing</h3>
+      <p>Vor Corona schon Single gewesen und/oder in der Coronazeit Singe geworden, ist die Isolation bei vielen Menschen nicht spurlos vorrüber gegangen. Sich in dieser Zeit Gedanken machen, das man was festes sucht und nichts lockeres und sein Gegenüber beim Date das gleich mitteilt Singles verschwenden keine Zeit mehr mit Menschen, die kein Interesse an jemandem zeigen. Offen und ehrlich werden über die Bedürfnisse geredet und was einem fehlt, was einem wichtig ist und wie sie sich eine Beziehung vorstellen</p>
+    </div>    
+    <div class="card" >
+      <h3>Hoovering</h3>
+      <p>Eifersuchtsszenen initialisieren</p>
+    </div>    
+    <div class="card" >
+      <h3>Houseplanting</h3>
+      <p>Du lebst mit deinem Schatz seit einiger Zeit zusammen, doch hast das Gefühl, dass ihr getrennte Leben führt? Ihr seht euch fast gar nicht mehr, Gespräche begrenzen sich auf geschriebene Nachrichten, der Partner hat nur noch den Stellenwert einer Zimmerpflanze (Houseplant). Rede mit deinem Partner (keinen Text schreiben) oder trennt euch</p>
+    </div>    
+    <div class="card" >
+      <h3>Hyping / Hyper Dating</h3>
+      <p>Du bist nur die Vorband für den Haupt-Act. Er benutzt dich, um emotional fit zu sein für die nächste Beziehung. Indem er dich erobert, stärkt er sein Selbstbewusstsein. Doch taucht dann erst mal der Hauptact auf, bist du abgeschrieben</p>
+    </div>    
+    <div class="card" >
+      <h3>Icing</h3>
+      <p>Eine Person bekundet Interesse, macht Komplimente. Doch irgendwann kommt dann die Wendung. Er oder sie ist nicht bereit für eine Beziehung. Anstatt das dann zu beenden, wirst du trotzdem noch warmgehalten.
+Wenn er oder sie sich immer vor ernsteren Gesprächen drückt und dir nie sagt, wo du stehst, solltest du achtsam werden.
+Es kann gut sein, dass du eine ganze Weile nichts von ihm oder ihr hörst, taucht diese Person dann plötzlich wieder auf und tut so, als sei nichts gewesen</p>
+    </div> 
+    <div class="card" >
+      <h3>Instafficial</h3>
+      <p>Das neue Beziehungsbild was auf Instagram geladen wird</p>
+    </div> 
+    <div class="card" >
+      <h3>Jekylling</h3>
+      <p>Jemand zeigt dir sein wahres Gesicht und das hat mit dem ersten Eindruck nichts mehr zu tun</p>
+    </div> 
+    <div class="card" >
+      <h3>Keanu-ing</h3>
+      <p>Wenn zwei Menschen zusammenkommen, von denen man es nicht erwartet hätte, nennt man das „den Keanu machen“</p>
+    </div> 
+    <div class="card" >
+      <h3>Kanye'd</h3>
+      <p>Bei einem Date redet Dein Gegenüber ausschliesslich nur von sich und lässt dich nicht zu Wort kommen</p>
+    </div> 
+    <div class="card" >
+      <h3>Kittenfishing</h3>
+      <p>Wenn eine Person sich ganz bewusst anders darstellt, als sie in Wahrheit ist, um für andere attraktiver zu werden: Die Profilfotos sind drei Jahre alt, weil man damals noch zehn Kilo weniger gewogen hat, die Selfies sind gefacetuned und auch beim Job oder den Hobbys wurde geschummelt, um sich spannender zu machen. Nein, es sind vielleicht keine dramatischen Lügen und sie werden spätestens beim ersten Treffen sowieso auffliegen, doch sie machen dem anderen falsche Hoffnungen und rauben ihm unnötig viel Zeit. Ausserdem ist ein Gerüst, das aus Flunkereien besteht, sowieso keine Grundlage für eine aufrichtige und funktionierende Beziehung. Aber einem hauptsache Zeit geraubt</p>
+    </div> 
+    <div class="card" >
+      <h3>Kondo-ing</h3>
+      <p>Aufräumen und Ausmisten. Sich fragen, ob dieser oder jener einem gut tut, und wenn nicht, dann einfach ausmisten</p>
+    </div> 
+    <div class="card" >
+      <h3>Loud Looking</h3>
+      <p>laute, offene Kommunizieren der eigenen Absichten beim Dating. Gleich zu Beginn mitteilen, was er oder sie sucht </p>
+    </div> 
+    <div class="card" >
+      <h3>Love Bombing</h3>
+      <p>ist die erste Phase des Kennenlernens einer Person mit meist Borderline-Anteilen, die in eine emotionale Abhängigkeit münden kann. Beim Love Bombing glaubt der Betroffene am Anfang meist, den Traumpartner gefunden zu haben: Der gibt sich Mühe und engagiert sich. Es werden aber, unter aller positiven Energie, tiefe Abgründe verdeckt, z.B. die Beziehungshistorie, in der frühere Beziehungen kaum lange hielten oder man kennt keine Liebe und überschüttet einem dann</p>
+    </div> 
+    <div class="card" >
+      <h3>Maskfishing</h3>
+      <p>Jeder Zweite postet sich aktuell mit Mund-Nase-Bedeckung. FFP2-Masken, Stoff-Varianten in Nachtschwarz oder mit Blümchenprint – alles schon geswiped. Während man beim etablierteren Catfishing vorgibt, jemand anderes zu sein, verbirgt der Suchende beim Maskfishing nicht seine komplette Persönlichkeit, sondern nur einen Teil seines Gesichts</p>
+    </div> 
+    <div class="card" >
+      <h3>Masturdating</h3>
+      <p>Eine Single-Frau gönnt sich was schönes, wenn sich der Typ nicht mehr meldet </p>
+    </div> 
+    <div class="card" >
+      <h3>Marleying</h3>
+      <p>wenn sich der oder die Ex sich um Weihnachten rum für ein Date meldet und dann ist man wieder vergessen.</p>
+    </div> 
+    <div class="card" >
+      <h3>Micro Cheating</h3>
+      <p>Eigene Beziehung vor Dritten leugnen oder herunterspielen und mit anderen Personen flirten</p>
+    </div> 
+    <div class="card" >
+      <h3>Micro Dating</h3>
+      <p>kurz Aufmerksamkeit erregen, nichts festes, dem gegenüber bewusst in die Augen schauen, zuhören, Nähe herstellen</p>
+    </div> 
+    <div class="card" >
+      <h3>Mingle</h3>
+      <p>Eine Person, die offiziell Single ist, aber eine beziehungsähnliche Verbindung zu einer anderen Person hat</p>
+    </div> 
+    <div class="card" >
+      <h3>Monkeying</h3>
+      <p>Kaum ist eine Beziehung beendet, ist schon wieder eine neue am Start</p>
+    </div> 
+    <div class="card" >
+      <h3>Montaging</h3>
+      <p>Singles planen schon nach dem ersten Date die gemeinsame Zukunft. Ohne den Dating-Partner genauer zu kennen, deuten sie Aussagen des Gegenübers so, dass auch der andere bereit für eine gemeinsame Beziehung ist. Dabei gehört auch dazu, sich schon die Hochzeit im Kopf gedanklich vorzustellen. Dates könnten im Frust enden Der Experte sieht das größte Risiko darin, dass die hohen Erwartungen in der ersten Phase nicht erfüllt werden und man auf unterschiedliche Erwartungen stößt. Dabei lässt man sich keine Zeit, sich wirklich näher kennen zu lernen</p>
+    </div> 
+    <div class="card" >
+      <h3>Mooning</h3>
+      <p>wie Ghosting, nur das du denjenigen per Smartphone ignorierst, ohne das die Person etwas davon mitbekommt</p>
+    </div> 
+    <div class="card" >
+      <h3>Mosting</h3>
+      <p>Kombination aus Love Bombing und Ghosting. Jemanden erst mit Liebe überschütten und sich anschliessend nie wieder melden</p>
+    </div> 
+    <div class="card" >
+      <h3>Nano-ships</h3>
+      <p>bezeichnen alle kleinen, romantischen Interaktionen, die noch weniger definiert und verlässlich sind, als Situationships oder Freundschaft Plus</p>
+    </div> 
+    <div class="card" >
+      <h3>Negging</h3>
+      <p>Deine Haarfarbe ist toll, obwohl man deinen Ansatz sieht. Du hast wirklich schöne Lippen. Wann hast du sie machen lassen? Schon mal in den Genuss eines solchen oder so ähnlichen Spruchs gekommen? Hinter diesen Seitenhieben verbirgt sich eine Absicht. Sie sollen dazu dienen, das Gegenüber zu verunsichern und das Selbstbewusstsein anzugreifen. Das hat nichts mit einem scherzhaften Spruch zu tun. Negging ist richtig gemein und kann verletzend sein</p>
+    </div> 
+    <div class="card" >
+      <h3>Nonversation</h3>
+      <p>langweiliger Smalltalk. Warnsignal, um von einem zweites Date abzuraten</p>
+    </div> 
+    <div class="card" >
+      <h3>Obligaswiping</h3>
+      <p>kein echtes Interesse besteht an einer Konversation geschweige denn an einem Treffen. Willkommen im Kreise der Obligaswiper. Diese fühlen sich als Single verpflichtet, an der Partnersuche teilzunehmen, tun dies aber nur oberflächlich</p>
+    </div> 
+    <div class="card" >
+      <h3>Open Casting</h3>
+      <p>Partner sind offener dafür, von den äußerlichen Vorstellungen vom Gegenüber abzuweichen</p>
+    </div> 
+    <div class="card" >
+      <h3>Orbiting</h3>
+      <p>Genau wie beim Ghosting bricht die Bekanntschaft jede Art von direkter Kommunikation ab, reagiert aber noch weiterhin auf sozialen Netzwerken mit Likes oder unbedeutenden Kommentaren. Diese Bekanntschaft sollte überall blockiert werden, sonst fängt man an, das Verhalten des anderen ständig zu analysieren und zu hinterfragen</p>
+    </div> 
+    <div class="card" >
+      <h3>Peacocking</h3>
+      <p>durch auffälliges Styling, Accessoire oder auch Verhalten versuchen Männer, die Aufmerksamkeit von mehreren oder einer bestimmten Frau auf sich zu ziehen</p>
+    </div> 
+    <div class="card" >
+      <h3>Pancake</h3>
+      <p>Wie der erste Pancake. Entweder noch nicht durch oder verbrannt</p>
+    </div>   
+    <div class="card" >
+      <h3>Paperclipping</h3>
+      <p>Sich nach langer Zeit des Nicht-Meldens, des Desinteresses und Abtauchens plötzlich wieder auf der Bildfläche zu erscheinen und sich erneut ins Gedächtnis des einstigen Date-Partners zu rufen, ganz so, als ob nichts gewesen wäre</p>
+    </div> 
+    <div class="card" >
+      <h3>Parallel-Dating</h3>
+      <p>Mehrere Dates haben und sich so nicht entscheiden können</p>
+    </div>   
+    <div class="card" >
+      <h3>Pigging</h3>
+      <p>"hässliche" Mädchen angeflirtet und anschliessend dann wieder abserviert</p>
+    </div> 
+    <div class="card" >
+      <h3>Pheromone Maxxing</h3>
+      <p>Vor dem Date nicht waschen und kein Deo.</p>
+    </div>       
+    <div class="card" >
+      <h3>Phubbing</h3>
+      <p>durch das Smartphone wischen, während man mit jemandem redet</p>
+    </div>       
+    <div class="card" >
+      <h3>Pocketing</h3>
+      <p>Auch dieser Dating-Trend ist brutal. Beim Pocketing bist Du zwar sein/ihr Partner, aber ausser euch weiss niemand davon und es darf auch niemand etwas davon erfahren. Am Anfang ist ein wenig Geheimniskrämerei ja noch ganz sinnvoll, aber spätestens nach einigen Monaten sollte er oder sie Dich schon den Freunden und Eltern vorstellen. Beim Pocketing hingegen passiert nichts dergleichen. Hier bleibst Du in der Tasche und wirst quasi versteckt. Warum? Da gibt es Tausend Gründe: Er/sie steht nicht zu Dir, schämt sich für Dich, hat offiziell eine andere Partnerschaft oder ist sogar verheiratet – um nur einige zu nennen</p>
+    </div> 
+    <div class="card" >
+      <h3>Polyamorie</h3>
+      <p>Das Führen von mehreren gleichzeitigen romantischen Beziehungen mit dem Wissen und der Zustimmung aller Beteiligten</p>
+    </div>    
+    <div class="card" >
+      <h3>Pre-Dating</h3>
+      <p>Zeit lassen mit dem Daten: Nachrichten schreiben, Videokonferenzen oder vielleicht auch telefonieren. Vor dem ersten Date herausfinden, ob wir das wirklich wollen..Vielleicht verpufft es auch schnell wieder, besonders dann, wenn man sich ausschließlich schreibt. Um es spannend zu halten, empfehle ich hin und wieder Sprachnachrichten und Guten-Morgen-Selfies zu verschicken und sich vielleicht auch mal zum BigBlueButton oder Jitsi Date zu verabreden</p>
+    </div> 
+    <div class="card" >
+      <h3>Prokrastination</h3>
+      <p>Es wurde ein Date ausgemacht obwohl man darauf überhaupt keine Lust hat Es ist einem egal, wo und wann man sich trifft und auch, was man an dem Abend anzieht</p>
+    </div>        
+    <div class="card" >
+      <h3>Resetters</h3>
+      <p>„Reset“ drücken und einen Neustart wagen</p>
+    </div> 
+    <div class="card" >
+      <h3>Retroshade</h3>
+      <p>Ein neuer alter Lover aus der Vergangenheit, der einem da schon nicht gutgetan hat, tritt wieder in dein Leben. Ob eine unerwartete Nachricht oder ein überraschender Anruf: Tun Sie sich selbst den Gefallen und ignorieren Sie den Annäherungsversuch</p>
+    </div>    
+    <div class="card" >
+      <h3>Roaching</h3>
+      <p>Zu Beginn einer Dating-Phase, manchmal aber auch über mehrere Wochen oder Monate hinweg, kann es vorkommen, dass man sich regelmässig mit der gleichen Person trifft, ohne festzulegen, dass man in einer Beziehung ist. Manche Menschen nutzen das aus und treffen sich noch mit weiteren Personen, ohne den jeweils anderen Dates davon zu erzählen. Fliegt die Masche auf, reden sie sich damit raus, dass sie sich nie auf eine feste Beziehung festgelegt hätten</p>
+    </div> 
+    <div class="card" >
+      <h3>R(ead)Bombing</h3>
+      <p>potentielle Partner lesen deine Nachrichten, beantworten diese aber nicht</p>
+    </div>   
+    <div class="card" >
+      <h3>Rossing</h3>
+      <p>Nicht immer verläuft eine Liebesgeschichte so, wie man sie sich vorgestellt hat. Denn manchmal verhält sich das Gegenüber anders, als man es erwartet. Während Rossing passiert genau das. Zwei Menschen, die nicht zusammen sind, aber dann irgendwie doch. Du hast jemanden an deiner Seite, den du mittlerweile schon länger triffst. Ihr verbringt viel Zeit miteinander, erzählt euch euere tiefsten Gedanken und kennt die Freunde des anderen. Eure Eltern wissen Bescheid, dass es jemanden gibt und vielleicht überlegst du, ihn bald auch deiner Familie vorzustellen. Somit seid ihr eigentlich zusammen, obwohl es noch nicht offiziell ist. Das Gespräch, das eure Beziehung zueinander definiert, gab es noch nicht. Das bedeutet jedoch nicht, dass ihr Single seid, zumindest dachtest du das. Denn dein Fast-Freund hat jetzt mit jemanden anderen geschlafen. Schuldig fühlt er sich nicht, denn rer hat nichts Falsches gemacht. Immerhin seid ihr nicht offiziell ein Paar. Während du wütend und enttäuscht bist, kann er nicht nachvollziehen, woher du dir dieses Recht rausnimmst. Es geht darum, dass man in einer Beziehung, die noch nicht offiziell gemacht wurde, mit anderen schläft. Und sich dann im Nachhinein so verhält, als wäre es das normalste auf der Welt, am Vormittag mit dem Gegenüber Händchen zu halten, während man abends mit einer anderen Person schläft. Hier wird vergessen, dass eine zwischenmenschliche Beziehung mehr ist, als ein Gespräch, das noch aussteht. Denn sich so zu verhalten, wie in einer Beziehung, aber kurz darauf so zu tun, als wäre man Single, ist sehr verletzend und verwirrend</p>
+    </div> 
+    <div class="card" >
+      <h3>Self-Gaslightingg</h3>
+      <p>Du hältst dich ständig für übersensibel. Oder deine Eltern vermitteln dir das. Wenn Beziehungen für selbstverständlich genommen werden, kann es vorkommen, dass Freund*innen oder Partner*in es nicht für nötig halten, sich dir gegenüber Mühe zu geben. Vielleicht lassen sie sich auch völlig gehen und stecken selbst keinerlei Energie in die Beziehung zu dir. Wirst du immer wieder von deinen Mitmenschen enttäuscht und du dir statt einer Konfrontation oder einem Kontaktabbruch einredest, dass das nun mal ihre ganz eigene Art ist, ihre Zuneigung zu zeigen, handelt es sich um Self-Gaslighting</p>
+    </div>    
+    <div class="card" >
+      <h3>Self-Love-Dating</h3>
+      <p>Das Fokussieren auf die eigene Selbstliebe und Selbstakzeptanz während des Dating-Prozesses, um eine gesündere und positivere Einstellung zu entwickeln</p>
+    </div> 
+    <div class="card" >
+      <h3>Sidebarring</h3>
+      <p>dezentes Abgleiten ins Smartphone, während man mit einem Gesprächspartner zu Tisch oder im Meeting sitzt</p>
+    </div>   
+    <div class="card" >
+      <h3>Single Shaming</h3>
+      <p>Wenn du permanent gefragt wirst, ob denn nun jemand in Sicht ist und dass schon irgendwann der Richtige, der Eine/die Eine kommen wird. Und wenn du das schon gar nicht mehr hören kannst, weil alle deine innere Wunde öffnen und das jedesmal erneut sehr schmwerzhaft ist</p>
+    </div>    
+    <div class="card" >
+      <h3>Situationship</h3>
+      <p>Man ist mit jemandem zusammen, fühlt sich aber einsam</p>
+    </div> 
+    <div class="card" >
+      <h3>Slip Of The Hun</h3>
+      <p>Mehrere Personen zur gleichen Zeit daten. Das Problem ist aber, dass die meisten Menschen damit nicht offen umgehen, sondern sie lassen jedes ihrer Dates in dem Glauben, zurzeit der oder die Einzige zu sein. Die Personen verlieren den Überblick. Klar, dass da mal Informationen oder Konversationen durcheinander geraten und dir wird plötzlich klar: Du bist nicht der oder die Einzige</p>
+    </div>   
+    <div class="card" >
+      <h3>Slow Dating</h3>
+      <p>Das bewusste Verlangsamen des Dating-Prozesses, um eine tiefere Verbindung aufzubauen und die Beziehung zu stabilisieren</p>
+    </div>    
+    <div class="card" >
+      <h3>Slow Fading</h3>
+      <p>Das Gegenüber anfangs sehr interessiert finden und dann sich immer seltener melden. So hört man zu Beginn des Datings noch drei mal täglich etwas von ihm. Die Woche darauf nur noch ein mal täglich. Irgendwann schon nur noch zwei tägig bis hin zu kompletter Funkstille</p>
+    </div> 
+    <div class="card" >
+      <h3>Sneating</h3>
+      <p>Stammt von sneaking und eating, also hinterlistig essen. Bei einem Date es so einfädeln, dass er die Rechnung am Ende übernehmen wird und zwar für alles: die Vorspeise, das viel zu teure Steak, die zwei Flaschen Wein und das Dessert</p>
+    </div>       
+    <div class="card" >
+      <h3>Snowmanning</h3>
+      <p>Sobald die Temperaturen wieder steigen, fängt auch das hitzige Herz des ewigen Singles an zu lodern. Menschen, die nur über Weihnachten einen Flirt suchen. Nach den Feiertagen lassen sie ihre Romanze wie eine heiße Kartoffel fallen</p>
+    </div>   
+    <div class="card" >
+      <h3>Sober Dating</h3>
+      <p>Nüchtern daten. So wird das Gehirn weniger vernebelt und man sieht die Person gegenüber klar. </p>
+    </div>    
+    <div class="card" >
+      <h3>Soft Ghosting</h3>
+      <p>Eine etwas mildere Form als Ghosting, aber eine mindestens genauso feige Verhaltensweise von Personen, die die Karten einfach nicht auf den Tisch legen wollen. Nur das es noch eine letzte Reaktion vom Gegenüber gibt. Danach kommt es aber auch zum Kontaktabbruch. Bei einer Konversation zwischen zwei Datingpartnern wird auf die letzte Nachricht vom Gegenüber nur so minimal reagiert, dass sich keine weitere Kommunikation daraus ergibt. Eine Nachricht wird mit Gefällt mir markiert, es kommt nur ein Daumen hoch zurück. der andere schreibt nur danke, als Antwort kommt nur ein Smiley. . Durch das Soft Ghosting lässt sich die Person somit also noch eine Tür offen, falls diese doch irgendwann wieder den Kontakt aufnehmen will. Der Soft Ghoster begibt sich in eine passive Position und entzieht sich der Verantwortung</p>
+    </div> 
+    <div class="card" >
+      <h3>Speed Hating</h3>
+      <p>Sich gemeinsam über ein Thema aufregen, um danach Herzklopfen zu bekommen</p>
+    </div>    
+    <div class="card" >
+      <h3>Stalking</h3>
+      <p>Daten sammeln </p>
+    </div>   
+    <div class="card" >
+      <h3>Stashing</h3>
+      <p>Euer Crush, den ihr vielleicht sogar schon seit Monaten datet, stellt euch einfach NIEMANDEM vor. Freunde, Familie oder Arbeitskollegen bleiben für euch Wildfremde. Aber das ist noch nicht alles, euer Partner leugnet euch vor seinen online und offline Freunden. Ihr teilt Bilder eures Dinners oder einen Schnappschuss vom letzten Wochenendtrip. Und er? Richtig, nichts! Die Geheimhaltung eurer Beziehung für den Stasher ist auch ein Freifahrtschein, um noch andere Frauen zu treffen, denn ihr seid nicht exklusiv und niemand weiss, dass ihr aktuell datet</p>
+    </div>    
+    <div class="card" >
+      <h3>Submarining</h3>
+      <p>Erst Ghosting und dann nach einer Weile wieder auftauchen</p>
+    </div> 
+    <div class="card" >
+      <h3>Sugar Dating</h3>
+      <p>Frauen suchen ganz bewusst einem reichen Mann, der ihnen Geld gibt oder teure Geschenke macht. Von Liebe ist gar nicht unbedingt die Rede.</p>
+    </div>     
+    <div class="card" >
+      <h3>Tindstagramming</h3>
+      <p>Auf Tinder einen Korb bekommen, belästigt man die Person weiter auf Instagram</p>
+    </div>   
+    <div class="card" >
+      <h3>Trash Dating</h3>
+      <p>Oft entscheiden wir dabei nach Kriterien, die sich aufs Aussehen und das soziale Milieu beschränken. Viel konsumieren und schnell wegschmeissen</p>
+    </div>    
+    <div class="card" >
+      <h3>Thunberging</h3>
+      <p>Wenn durch das Thema Klimawandel mehr Singles zusammenkommen</p>
+    </div> 
+    <div class="card" >
+      <h3>Tuning</h3>
+      <p>Wer ständig alle Bilder liked, Kontakt sucht, flirtet, aber irgendwie nie eindeutig wird, ist ein Tuner. Der Grund: Viele sind noch vergeben, wenn auch unglücklich, oder wollen sich, wie so oft, einfach nicht festlegen</p>
+    </div>       
+    <div class="card" >
+      <h3>Uncuffing</h3>
+      <p>emotionaler Frühjahrsputz. vom Winterdate trennen, um als freier Single sich ein Sommerdate zu angeln</p>
+    </div>   
+    <div class="card" >
+      <h3>V-lationshipping</h3>
+      <p>billiger Reflex, den manche Menschen kurz vorm Valentinstag haben: Jemand, den sie mal erfolglos gedatet haben, meldet sich Anfang Februar wieder, um am 14. nicht allein sein zu müssen</p>
+    </div>    
+    <div class="card" >
+      <h3>Virtual Dating</h3>
+      <p>Das Treffen mit jemandem in einer virtuellen Umgebung, wie z.B. durch Videokonferenzen oder VR-Technologie</p>
+    </div> 
+    <div class="card" >
+      <h3>Volunteering</h3>
+      <p>Bekanntschaft nach langer Überzeugung zu einem ersten Date gedrängt</p>
+    </div> 
+    <div class="card" >
+      <h3>Wanderlove</h3>
+      <p>Beziehung mit einem Mensch eingehen, der in einer anderen Stadt lebt</p>
+    </div>   
+    <div class="card" >
+      <h3>Whelming</h3>
+      <p>wenn viele Menschen momentan an Dir Interesse zeigen </p>
+    </div>    
+    <div class="card" >
+      <h3>White Clawing</h3>
+      <p>nur mit seinem Date zusammen, weil man ihn / sie attraktiv findet, nebenbei aber eigentlich denkt, er sei langweilig und zu einfach gestrickt</p>
+    </div> 
+    <div class="card" >
+      <h3>Wokefishing</h3>
+      <p>wenn eine Person Wertvorstellungen und politische Einstellungen verfälscht, um potenzielle Dates zu verführen. Männer zielen darauf ab, Frauen abzuschleppen, indem sie Interessen und Vorlieben vortäuschen</p>
+    </div> 
+    <div class="card" >
+      <h3>Yellow Carding</h3>
+      <p>Ihr seid auf einem Date, versteht euch ziemlich gut, doch plötzlich sagt euer Gegenüber irgendwas, das euch aus der Bahn wirft und ihr nur "Wos, bitte??“ denkt. Ihr versucht, eure Irritation zu überspielen und das Date so schnell wie möglich hinter euch zu bringen, habt aber insgeheim schon beschlossen, dass ihr beide wohl keine Soulmates seid und es kein weiteres Treffen geben wird.</p>
+    </div>   
+    <div class="card" >
+      <h3>Zombieing</h3>
+      <p>Nach Monaten/Jahren der Funkstille (Ghosting), meldet sich der Schwarm wieder zurück. Männer schreiben dann: Lange nichts mehr von Dir gehört. als wäre keine Funkstille gewesen. Und wenn das Mädchen anfängt zu fragen, kommt keine Antwort mehr</p>
+    </div>    
+    <div class="card" >
+      <h3>Zumping</h3>
+      <p>Trennung via Video-Chat.</p>
+    </div> 
+  </div>
+
+  <footer>Juni 2026</footer>
+  <footer>
+   <p>License <a href="http://www.wtfpl.net/"><img src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png" width="80" height="15" alt="WTFPL" /></a></p>
+</footer>
+
+</div>
+
+
+</body>
+</html>
